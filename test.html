@@ -1,0 +1,60 @@
+---
+Title: Test page
+tags: "x"
+---
+{{page.tags | join: ', '}}
+
+{% highlight javascript %}
+    var test = 1;
+    console.log('alert');
+{% endhighlight %}
+<h1>Title: {{page.Title}}</h1>
+<h1>Title: {{page.url}}</h1>
+
+<h1>List 1: list</h1>
+<h2>{{ site.data.samplelist.docs_list_title }}</h2>
+
+{% for item in site.data.samplelist.docs %}
+    <h3>{{item.title}} - {{item.rank}}</h3>
+    <li><a href="{{item.url}}" alt="{{item.title}}">{{item.title}}</a></li>
+{% endfor %}
+
+<h1>List 2: sorted list</h1>
+{% assign docList = site.data.samplelist.docs | sort: 'rank' %}
+{% for item in docList %}
+    <h3>{{item.title}} - {{item.rank}}</h3>
+    <li><a href="{{item.url}}" alt="{{item.title}}">{{item.title}}</a></li>
+{% endfor %}
+
+
+<h1>List 3: TOC</h1>
+{% for group in site.data.samplelist.toc %}
+    <h2>{{group.title}}</h2>
+    <ul>
+        {% for item in group.subfolderitems %}
+            <li><a href="{{item.url}}" >{{item.page}}</a></li>            
+        {% endfor %}
+    </ul>
+
+{% endfor %}
+
+
+<h1>List 4: Toc 2</h1>
+{% for group in site.data.samplelist.toc2 %}
+    <h2>{{group.title}}</h2>
+    {% if group.subfolderitems[0] %}
+        <ul>
+            {% for item in group.subfolderitems %}
+                <li><a href="{{item.url}}" >{{item.page}}</a></li>
+                {% if item.subsubfolderitems[0] %}
+                    <ul>
+                        {% for entry in item.subsubfolderitems %}
+                            <li><a href="{{entry.url}}">entry.page</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}   
+        </ul>
+    {% endif %}
+{% endfor %}
+

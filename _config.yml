@@ -1,0 +1,4 @@
+baseurl: /
+exclude: ['README.md']
+theme: jekyll-theme-cayman
+##permalink: pretty
