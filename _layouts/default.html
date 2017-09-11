@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <title>
+        {% if page.title %}{{page.title}} - {% endif %} Charz Page {% if page.titleAfter %} - {{page.titleAfter}}{% endif %}
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{page.meta}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+    <link rel="stylesheet" href="{{site.baseurl}}/css/main.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="container__top">
+
+        </div>
+        <nav class="navbar ">
+            <div class="navbar-brand">
+                <div class="navbar-burger burger" data-target="navMenubd-example">
+                    <span>
+                        <a href="{{site.baseurl}}{{page.url}}">home</a>
+                        
+                    </span>
+                    <span>
+                        <a href="">Posts By </a>
+                    </span>
+                    <span></span>
+                </div>
+            </div>
+    
+            <div id="navMenubd-example" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item is-hoverable" href="/">
+                        Home
+                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link " href="{{site.baseurl}}/Post_by_Date.html">
+                                Posts by Date
+                        </a>
+                        <div id="dateDropdown" class="navbar-dropdown " data-style="width: 18rem;">
+                            {% assign byDatePosts = site.posts reversed | limit:1 %}
+                            {% for post in byDatePosts %}
+                                <a href="{{site.baseurl}}{{post.url}}" class="navbar-item">
+                                    <div class="navbar-content">
+                                        <p>
+                                            <small class="has-text-info">{{post.date}}</small>
+                                        </p>
+                                        <p>{{post.meta}}</p>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <a class="navbar-item is-hoverable" href={{site.baseurl}}/Post_by_Tag.html>
+                        Post By Tags
+                    </a>
+                </div>
+            </div>
+        </nav>
+        {{content}}
+    </div>
+    
+</body>
+
+</html>
